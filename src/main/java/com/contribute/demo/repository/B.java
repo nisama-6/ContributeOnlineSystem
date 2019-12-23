@@ -8,4 +8,5 @@ package com.contribute.demo.repository;
  **/
 
 public class B {
+    void fun();
 }
