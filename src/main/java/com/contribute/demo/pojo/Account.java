@@ -31,6 +31,16 @@ public class Account {
 
     private String identity;
 
+    private String adv_url;
+
+    public String getAdv_url() {
+        return adv_url;
+    }
+
+    public void setAdv_url(String adv_url) {
+        this.adv_url = adv_url;
+    }
+
     public String getIdentity() {
         return identity;
     }
