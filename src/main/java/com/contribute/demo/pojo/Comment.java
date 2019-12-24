@@ -38,6 +38,7 @@ public class Comment {
                 ", suggestion='" + suggestion + '\'' +
                 ", suggestdate='" + suggestdate + '\'' +
                 '}';
+
     }
 
     public int getId() {
