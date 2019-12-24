@@ -16,15 +16,9 @@ public class Contribution {
     private double wordnumber;
     private String kind;
     private String uploaddate;
-    private boolean isCommented;
+    private boolean discussed;
 
-    public boolean isCommented() {
-        return isCommented;
-    }
-
-    public void setCommented(boolean commented) {
-        isCommented = commented;
-    }
+   
 
     @OneToOne
     @JoinColumn(name = "accountId" ,referencedColumnName = "id")
@@ -95,15 +89,12 @@ public class Contribution {
         this.account = account;
     }
 
-    public Contribution(String name, String url, double wordnumber, String kind, String uploaddate, boolean isCommented, Account account, Comment comment) {
-        this.name = name;
-        this.url = url;
-        this.wordnumber = wordnumber;
-        this.kind = kind;
-        this.uploaddate = uploaddate;
-        this.isCommented = isCommented;
-        this.account = account;
-        this.comment = comment;
+    public boolean isDiscussed() {
+        return discussed;
+    }
+
+    public void setDiscussed(boolean discussed) {
+        this.discussed = discussed;
     }
 
     public Comment getComment() {

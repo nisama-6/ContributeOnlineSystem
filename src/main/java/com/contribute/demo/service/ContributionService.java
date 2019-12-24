@@ -14,7 +14,7 @@ import java.util.List;
 public interface ContributionService {
     void upload(Contribution contribution);
     public List<Contribution> findAll();
-    public List<Contribution> findIsCommited(boolean isCommited);
+    public List<Contribution> findIsDiscussed(boolean isDiscussed);
     public void save(Contribution contribution);
 
     }

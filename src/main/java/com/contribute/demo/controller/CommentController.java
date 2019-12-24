@@ -30,7 +30,7 @@ public class CommentController {
      */
     @PostMapping(value = "/addcomment")
     public Result addComment(@RequestBody Contribution contribution){
-        contribution.setCommented(true); //设为已经评论过
+        //contribution.setCommented(true); //设为已经评论过
         contributionService.save(contribution);
         return new Result();
     }

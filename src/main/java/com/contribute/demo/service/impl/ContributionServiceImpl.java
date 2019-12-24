@@ -15,8 +15,8 @@ public class ContributionServiceImpl implements ContributionService {
     ContributionRepository contributionRepository;
 
     @Override
-    public List<Contribution> findIsCommited(boolean isCommited) {
-        return contributionRepository.findContributionsByIscommented(isCommited);
+    public List<Contribution> findIsDiscussed(boolean isDiscussed) {
+        return contributionRepository.findContributionsByDiscussed(isDiscussed);
     }
 
     @Override
