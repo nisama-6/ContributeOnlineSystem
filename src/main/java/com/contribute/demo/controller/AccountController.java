@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * @ClassName : AccountController
  * @Description : TODO
@@ -22,14 +25,11 @@ public class AccountController {
     @Autowired
     private WebSocketService webSocketService;
 
-    @RequestMapping(path = "/login",method = RequestMethod.POST)
-    String login(@RequestParam("username") String username,@RequestParam("password") String password){
-        Account account =new Account();
-        account.setId(Integer.valueOf(username));
-        account.setIdentity("expert");
-
-        return "登陆成功";
+    @RequestMapping(value ="/login", method = RequestMethod.GET)
+    public String login(HttpServletResponse response)throws IOException {
+        return "login";
     }
+
     @RequestMapping(path = "/send",method = RequestMethod.POST)
     String sendMessage(@RequestParam("message") String message){
         webSocketService.sendMessageToAllExpert(message);
