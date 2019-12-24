@@ -33,6 +33,11 @@ public class Account {
 
     private String adv_url;
 
+    @OneToOne
+    @JoinColumn(name="userId",referencedColumnName="id")
+    private Usermessage usermessage;
+
+
     public String getAdv_url() {
         return adv_url;
     }
@@ -95,5 +100,13 @@ public class Account {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public Usermessage getUsermessage() {
+        return usermessage;
+    }
+
+    public void setUsermessage(Usermessage usermessage) {
+        this.usermessage = usermessage;
     }
 }

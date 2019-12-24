@@ -27,8 +27,7 @@ public class Usermessage {
 
     private String address;
 
-    @OneToOne
-    @JoinColumn(name="accountId",referencedColumnName="id")
+    @OneToOne(mappedBy="usermessage",cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     private Account account;
 
     public Integer getId() {
