@@ -12,9 +12,6 @@ public class Comment {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "conId" ,referencedColumnName = "id")
-    private Contribution contribution;//稿件的ID
 
     @OneToOne
     @JoinColumn(name = "accountId" ,referencedColumnName = "id")
@@ -28,33 +25,12 @@ public class Comment {
     public Comment() {
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", contribution=" + contribution +
-                ", account=" + account +
-                ", isPass=" + isPass +
-                ", suggestion='" + suggestion + '\'' +
-                ", suggestdate='" + suggestdate + '\'' +
-                '}';
-
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Contribution getContribution() {
-        return contribution;
-    }
-
-    public void setContribution(Contribution contribution) {
-        this.contribution = contribution;
     }
 
     public Account getAccount() {
@@ -89,8 +65,7 @@ public class Comment {
         this.suggestdate = suggestdate;
     }
 
-    public Comment(Contribution contribution, Account account, boolean isPass, String suggestion, String suggestdate) {
-        this.contribution = contribution;
+    public Comment(Account account, boolean isPass, String suggestion, String suggestdate) {
         this.account = account;
         this.isPass = isPass;
         this.suggestion = suggestion;

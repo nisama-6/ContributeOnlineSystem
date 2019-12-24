@@ -20,17 +20,14 @@ public class Contribution {
     @JoinColumn(name = "accountId" ,referencedColumnName = "id")
     private Account account;//账户
 
+    @OneToOne
+    @JoinColumn(name = "commentId" ,referencedColumnName = "id")
+    private Comment comment;//评价
+
     public Contribution() {
     }
 
-    public Contribution(String name, String url, double wordnumber, String kind, String uploaddate, Account account) {
-        this.name = name;
-        this.url = url;
-        this.wordnumber = wordnumber;
-        this.kind = kind;
-        this.uploaddate = uploaddate;
-        this.account = account;
-    }
+
 
     public int getId() {
         return id;
@@ -98,6 +95,25 @@ public class Contribution {
                 ", kind='" + kind + '\'' +
                 ", uploaddate='" + uploaddate + '\'' +
                 ", account=" + account +
+                ", comment=" + comment +
                 '}';
+    }
+
+    public Contribution(String name, String url, double wordnumber, String kind, String uploaddate, Account account, Comment comment) {
+        this.name = name;
+        this.url = url;
+        this.wordnumber = wordnumber;
+        this.kind = kind;
+        this.uploaddate = uploaddate;
+        this.account = account;
+        this.comment = comment;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 }
