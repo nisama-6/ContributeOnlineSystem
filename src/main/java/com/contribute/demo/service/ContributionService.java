@@ -9,7 +9,7 @@ import com.contribute.demo.pojo.Contribution;
  * @Date : 2019/12/24
  **/
 
-public interface UploadService {
+public interface ContributionService {
     void upload(Contribution contribution);
 
 }
