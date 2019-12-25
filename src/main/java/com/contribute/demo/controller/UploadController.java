@@ -2,6 +2,7 @@ package com.contribute.demo.controller;
 
 import com.contribute.demo.pojo.Contribution;
 import com.contribute.demo.service.ContributionService;
+import com.contribute.demo.service.LoginMessageService;
 import com.contribute.demo.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,12 @@ public class UploadController {
     @Autowired
     private ContributionService uploadService;
 
+    @Autowired
+    private LoginMessageService loginMessageService;
 
     @RequestMapping(path = "/upload",method = RequestMethod.POST)
     Result uploadContribute(Contribution contribution){
+        contribution.setAccount(loginMessageService.getLoginAccount());
         uploadService.upload(contribution);
         return new Result(true,"");
     }
