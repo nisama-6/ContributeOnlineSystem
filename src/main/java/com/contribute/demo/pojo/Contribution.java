@@ -17,6 +17,7 @@ public class Contribution {
     private String kind;
     private String uploaddate;
     private boolean discussed;
+    private String description;
 
    
 
@@ -105,18 +106,13 @@ public class Contribution {
         this.comment = comment;
     }
 
-    @Override
-    public String toString() {
-        return "Contribution{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", wordnumber=" + wordnumber +
-                ", kind='" + kind + '\'' +
-                ", uploaddate='" + uploaddate + '\'' +
-                ", discussed=" + discussed +
-                ", account=" + account +
-                ", comment=" + comment +
-                '}';
+    public String getDescription() {
+        return description;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
 }

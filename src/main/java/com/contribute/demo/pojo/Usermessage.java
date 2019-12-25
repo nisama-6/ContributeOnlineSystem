@@ -27,9 +27,6 @@ public class Usermessage {
 
     private String address;
 
-    @OneToOne(mappedBy="usermessage",cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
-    private Account account;
-
     public Integer getId() {
         return id;
     }
@@ -70,11 +67,4 @@ public class Usermessage {
         this.address = address;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

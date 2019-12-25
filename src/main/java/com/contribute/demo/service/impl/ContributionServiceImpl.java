@@ -3,6 +3,7 @@ package com.contribute.demo.service.impl;
 import com.contribute.demo.pojo.Contribution;
 import com.contribute.demo.repository.ContributionRepository;
 import com.contribute.demo.service.ContributionService;
+import com.contribute.demo.service.LoginMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ public class ContributionServiceImpl implements ContributionService {
 
     @Autowired
     ContributionRepository contributionRepository;
+    @Autowired
+    LoginMessageService loginMessageService;
 
     @Override
     public List<Contribution> findIsDiscussed(boolean isDiscussed) {
@@ -31,6 +34,9 @@ public class ContributionServiceImpl implements ContributionService {
 
     @Override
     public void save(Contribution contribution) {
+
+        contribution.setDiscussed(true);
+        contribution.getComment().setAccount(loginMessageService.getLoginAccount());
         contributionRepository.save(contribution);
     }
 }

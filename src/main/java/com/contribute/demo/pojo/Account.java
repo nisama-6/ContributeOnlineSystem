@@ -33,10 +33,24 @@ public class Account {
 
     private String adv_url;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name="userId",referencedColumnName="id")
     private Usermessage usermessage;
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", level='" + level + '\'' +
+                ", exp='" + exp + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", identity='" + identity + '\'' +
+                ", adv_url='" + adv_url + '\'' +
+                ", usermessage=" + usermessage +
+                '}';
+    }
 
     public String getAdv_url() {
         return adv_url;

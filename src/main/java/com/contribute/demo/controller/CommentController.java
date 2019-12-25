@@ -3,6 +3,7 @@ package com.contribute.demo.controller;
 import com.contribute.demo.pojo.Contribution;
 import com.contribute.demo.repository.CommentRepository;
 import com.contribute.demo.service.ContributionService;
+import com.contribute.demo.service.LoginMessageService;
 import com.contribute.demo.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ public class CommentController {
 
     @Autowired
     ContributionService contributionService;
+    @Autowired
+    LoginMessageService loginMessageService;
 
     /**
      * 查询所有的稿件
@@ -30,10 +33,10 @@ public class CommentController {
      */
     @PostMapping(value = "/addcomment")
     public Result addComment(@RequestBody Contribution contribution){
-
-        contribution.setDiscussed(true); //设为已经评论过
         contributionService.save(contribution);
         return new Result();
     }
+
+
 
 }

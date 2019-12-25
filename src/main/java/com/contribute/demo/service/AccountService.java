@@ -1,6 +1,7 @@
 package com.contribute.demo.service;
 
 import com.contribute.demo.pojo.Account;
+import com.contribute.demo.pojo.Usermessage;
 
 /**
  * @ClassName : AccountService
@@ -12,4 +13,7 @@ import com.contribute.demo.pojo.Account;
 public interface AccountService {
 
     Account findByUsername(String username);
+
+
+    void editUserMessage(Usermessage msg);//编辑用户的个人资料
 }
