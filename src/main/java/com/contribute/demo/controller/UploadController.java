@@ -5,6 +5,7 @@ import com.contribute.demo.service.ContributionService;
 import com.contribute.demo.service.LoginMessageService;
 import com.contribute.demo.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 
 
-@RestController("/user")
+@RestController
+@RequestMapping(value = "/user")
 public class UploadController {
 
     @Autowired
@@ -26,7 +28,7 @@ public class UploadController {
     @Autowired
     private LoginMessageService loginMessageService;
 
-    @RequestMapping(path = "/upload",method = RequestMethod.POST)
+    @PostMapping(value = "/upload")
     Result uploadContribute(Contribution contribution){
         contribution.setAccount(loginMessageService.getLoginAccount());
         uploadService.upload(contribution);

@@ -26,7 +26,7 @@ public class ContributionServiceImpl implements ContributionService {
 
     @Override
     public void upload(Contribution contribution) {
-
+        contributionRepository.save(contribution);
     }
 
     @Override
