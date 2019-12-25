@@ -14,6 +14,7 @@ public class Comment {
 
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "accountId" ,referencedColumnName = "id")
     private Account account;
 

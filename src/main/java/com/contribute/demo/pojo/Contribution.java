@@ -1,6 +1,8 @@
 package com.contribute.demo.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -19,9 +21,9 @@ public class Contribution {
     private boolean discussed;
     private String description;
 
-   
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accountId" ,referencedColumnName = "id")
     private Account account;//账户
 
@@ -81,11 +83,9 @@ public class Contribution {
     public void setUploaddate(String uploaddate) {
         this.uploaddate = uploaddate;
     }
-
     public Account getAccount() {
         return account;
     }
-
     public void setAccount(Account account) {
         this.account = account;
     }

@@ -39,4 +39,9 @@ public class ContributionServiceImpl implements ContributionService {
         contribution.getComment().setAccount(loginMessageService.getLoginAccount());
         contributionRepository.save(contribution);
     }
+
+    @Override
+    public List<Contribution> findByAccountID(Integer id) {
+        return contributionRepository.findContributionsByAccount_Id(id);
+    }
 }

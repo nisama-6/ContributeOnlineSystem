@@ -25,7 +25,7 @@ public class AjaxSessionInformationExpiredStrategy implements SessionInformation
         HttpServletResponse response = event.getResponse();
         logger.info("进入异地登陆处理");
         response.setContentType("application/json;charset=UTF-8");
-        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Origin","http://localhost:8080");
         response.setHeader("Access-Control-Expose-Headers","*");
         response.setHeader("Access-Control-Allow-Methods","GET，POST，OPTIONS，PUT，DELETE");
         response.setHeader("Access-Control-Allow-Credentials","true");

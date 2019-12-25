@@ -13,8 +13,8 @@ import java.util.List;
 
 public interface ContributionService {
     void upload(Contribution contribution);
-    public List<Contribution> findAll();
-    public List<Contribution> findIsDiscussed(boolean isDiscussed);
-    public void save(Contribution contribution);
-
-    }
+    List<Contribution> findAll();
+    List<Contribution> findIsDiscussed(boolean isDiscussed);
+    void save(Contribution contribution);
+    List<Contribution> findByAccountID(Integer id);
+}
