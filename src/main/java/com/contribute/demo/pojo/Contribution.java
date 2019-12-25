@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "tb_contribution")
 public class Contribution {
     @Id
-    @JsonIgnore
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
@@ -20,7 +20,7 @@ public class Contribution {
 
    
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "accountId" ,referencedColumnName = "id")
     private Account account;//账户
 
@@ -103,5 +103,20 @@ public class Contribution {
 
     public void setComment(Comment comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "Contribution{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", wordnumber=" + wordnumber +
+                ", kind='" + kind + '\'' +
+                ", uploaddate='" + uploaddate + '\'' +
+                ", discussed=" + discussed +
+                ", account=" + account +
+                ", comment=" + comment +
+                '}';
     }
 }
