@@ -30,10 +30,10 @@ public class AccountController {
         return "login";
     }
 
-    @RequestMapping(path = "/send",method = RequestMethod.POST)
-    String sendMessage(@RequestParam("message") String message){
-        webSocketService.sendMessageToAllExpert(message);
-
-        return "发送成功";
-    }
+//    @RequestMapping(path = "/send",method = RequestMethod.POST)
+//    String sendMessage(@RequestParam("message") String message){
+//        webSocketService.sendMessageToAllExpert(message);
+//
+//        return "发送成功";
+//    }
 }

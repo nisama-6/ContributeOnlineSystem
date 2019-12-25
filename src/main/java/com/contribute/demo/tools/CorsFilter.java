@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -31,6 +32,8 @@ public class CorsFilter implements Filter {
         logger.info("doFilter");
 
         HttpServletRequest reqs = (HttpServletRequest) req;
+
+        HttpSession session = ((HttpServletRequest) req).getSession();
 
         response.setHeader("Access-Control-Allow-Origin","*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
