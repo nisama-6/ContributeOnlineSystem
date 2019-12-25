@@ -16,11 +16,15 @@ public class Contribution {
     private double wordnumber;
     private String kind;
     private String uploaddate;
+    private boolean discussed;
+
+   
+
     @OneToOne
     @JoinColumn(name = "accountId" ,referencedColumnName = "id")
     private Account account;//账户
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "commentId" ,referencedColumnName = "id")
     private Comment comment;//评价
 
@@ -85,28 +89,12 @@ public class Contribution {
         this.account = account;
     }
 
-    @Override
-    public String toString() {
-        return "Contribution{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", wordnumber=" + wordnumber +
-                ", kind='" + kind + '\'' +
-                ", uploaddate='" + uploaddate + '\'' +
-                ", account=" + account +
-                ", comment=" + comment +
-                '}';
+    public boolean isDiscussed() {
+        return discussed;
     }
 
-    public Contribution(String name, String url, double wordnumber, String kind, String uploaddate, Account account, Comment comment) {
-        this.name = name;
-        this.url = url;
-        this.wordnumber = wordnumber;
-        this.kind = kind;
-        this.uploaddate = uploaddate;
-        this.account = account;
-        this.comment = comment;
+    public void setDiscussed(boolean discussed) {
+        this.discussed = discussed;
     }
 
     public Comment getComment() {

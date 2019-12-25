@@ -2,6 +2,8 @@ package com.contribute.demo.service;
 
 import com.contribute.demo.pojo.Contribution;
 
+import java.util.List;
+
 /**
  * @ClassName : UploadService
  * @Description : TODO
@@ -11,5 +13,8 @@ import com.contribute.demo.pojo.Contribution;
 
 public interface ContributionService {
     void upload(Contribution contribution);
+    public List<Contribution> findAll();
+    public List<Contribution> findIsDiscussed(boolean isDiscussed);
+    public void save(Contribution contribution);
 
-}
+    }
