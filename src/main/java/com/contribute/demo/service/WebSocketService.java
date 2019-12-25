@@ -1,5 +1,7 @@
 package com.contribute.demo.service;
 
+import com.contribute.demo.tools.ResponseMessage;
+
 /**
  * @ClassName : webSocketService
  * @Description : TODO
@@ -12,13 +14,13 @@ public interface WebSocketService {
     /**
      * 发送消息给指定ID
      * @param id 接收人ID
-     * @param message 消息
+     * @param responseMessage 消息
      */
-    void sendMessageByID(Integer id,String message);
+    void sendMessageByID(Integer id, ResponseMessage responseMessage);
 
     /**
      * 发送消息给所有专家
-     * @param message 消息
+     * @param responseMessage 消息
      */
-    void sendMessageToAllExpert(String message);
+    void sendMessageToAllExpert(ResponseMessage responseMessage);
 }

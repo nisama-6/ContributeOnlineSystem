@@ -5,7 +5,6 @@ import com.contribute.demo.service.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,10 +29,15 @@ public class AccountController {
         return "login";
     }
 
-    @RequestMapping(path = "/send",method = RequestMethod.POST)
-    String sendMessage(@RequestParam("message") String message){
-        webSocketService.sendMessageToAllExpert(message);
-
-        return "发送成功";
+    @RequestMapping(value ="/test", method = RequestMethod.GET)
+    public String test(HttpServletResponse response)throws IOException {
+        return "login";
     }
+
+//    @RequestMapping(path = "/send",method = RequestMethod.POST)
+//    String sendMessage(@RequestParam("message") String message){
+//        webSocketService.sendMessageToAllExpert(message);
+//
+//        return "发送成功";
+//    }
 }

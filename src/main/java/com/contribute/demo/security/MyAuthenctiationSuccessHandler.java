@@ -28,18 +28,9 @@ public class MyAuthenctiationSuccessHandler extends SavedRequestAwareAuthenticat
             throws IOException, ServletException {
         logger.info("登录成功");
         Account account=new Account();
-        String _authorities="";
-//        EntityGraph graph = accountRepository.getEntityGraph("graph.Department.employees");
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
-//            account.setUsername(currentUserName);
             account=accountService.findByUsername(currentUserName);
-//            List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
-//            for (GrantedAuthority grantedAuthority : authorities) {
-//               _authorities += grantedAuthority.getAuthority();
-//            }
-////            account.setIdentity(authentication.getAuthorities());
-//            account.setIdentity(_authorities);
         }
         response=ResponseHandle.responseHandle(response);
         response.getWriter().write( JSON.toJSONString(new Result(true,"登陆成功",account)));
