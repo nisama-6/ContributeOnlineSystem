@@ -47,7 +47,7 @@ public class AccountController {
      * 用户修改个人资料
      */
     @RequestMapping(value = "/editusermsg",method = RequestMethod.POST)
-    public Result editUserMessage(@RequestBody Usermessage msg){
+    public Result editUserMessage(Usermessage msg){
         accountService.editUserMessage(msg);
         return new Result();
     }

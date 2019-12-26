@@ -1,11 +1,13 @@
 package com.contribute.demo.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_comment")
+@JsonIgnoreProperties(value = {"usermessage"})
 public class Comment {
     @Id
     @JsonIgnore
@@ -15,10 +17,10 @@ public class Comment {
 
     @OneToOne
     @JsonIgnore
-    @JoinColumn(name = "accountId" ,referencedColumnName = "id")
-    private Account account;
+    @JoinColumn(name = "expertId" ,referencedColumnName = "id")
+    private Account expert;
 
-    private boolean isPass;//是否通过
+    private boolean pass;//是否通过
 
     private String suggestion;//专家的建议内容
     private String suggestdate;//发表建议的日期
@@ -34,20 +36,20 @@ public class Comment {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
+    public Account getExpert() {
+        return expert;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setExpert(Account expert) {
+        this.expert = expert;
     }
 
     public boolean isPass() {
-        return isPass;
+        return pass;
     }
 
     public void setPass(boolean pass) {
-        isPass = pass;
+        this.pass = pass;
     }
 
     public String getSuggestion() {
@@ -66,9 +68,9 @@ public class Comment {
         this.suggestdate = suggestdate;
     }
 
-    public Comment(Account account, boolean isPass, String suggestion, String suggestdate) {
-        this.account = account;
-        this.isPass = isPass;
+    public Comment(Account expert, boolean pass, String suggestion, String suggestdate) {
+        this.expert = expert;
+        this.pass = pass;
         this.suggestion = suggestion;
         this.suggestdate = suggestdate;
     }

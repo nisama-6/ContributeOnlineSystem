@@ -11,5 +11,5 @@ public interface ContributionRepository extends JpaRepository<Contribution,Integ
     Contribution findContributionById(int id);
     void deleteById(int id);
     List<Contribution> findContributionsByDiscussed(boolean discussed);
-    List<Contribution> findContributionsByAccount_Id(Integer id);
+    List<Contribution> findContributionsByAuthor_Id(Integer id);
 }

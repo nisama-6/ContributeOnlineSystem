@@ -36,12 +36,12 @@ public class ContributionServiceImpl implements ContributionService {
     public void save(Contribution contribution) {
 
         contribution.setDiscussed(true);
-        contribution.getComment().setAccount(loginMessageService.getLoginAccount());
+        contribution.getComment().setExpert(loginMessageService.getLoginAccount());
         contributionRepository.save(contribution);
     }
 
     @Override
     public List<Contribution> findByAccountID(Integer id) {
-        return contributionRepository.findContributionsByAccount_Id(id);
+        return contributionRepository.findContributionsByAuthor_Id(id);
     }
 }

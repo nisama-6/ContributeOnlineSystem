@@ -1,9 +1,5 @@
 package com.contribute.demo.pojo;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 @Entity
@@ -22,10 +18,9 @@ public class Contribution {
     private String description;
 
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accountId" ,referencedColumnName = "id")
-    private Account account;//账户
+    @JoinColumn(name = "authorId" ,referencedColumnName = "id")
+    private Account author;//账户
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "commentId" ,referencedColumnName = "id")
@@ -83,11 +78,11 @@ public class Contribution {
     public void setUploaddate(String uploaddate) {
         this.uploaddate = uploaddate;
     }
-    public Account getAccount() {
-        return account;
+    public Account getAuthor() {
+        return author;
     }
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAuthor(Account author) {
+        this.author = author;
     }
 
     public boolean isDiscussed() {
