@@ -29,6 +29,15 @@ public class Comment {
     @JoinColumn(name = "contributionId" ,referencedColumnName = "id")
     @OneToOne
     private Contribution contribution;
+
+    public Contribution getContribution() {
+        return contribution;
+    }
+
+    public void setContribution(Contribution contribution) {
+        this.contribution = contribution;
+    }
+
     public Comment() {
     }
 

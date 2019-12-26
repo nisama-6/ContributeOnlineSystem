@@ -1,5 +1,6 @@
 package com.contribute.demo.repository;
 
+import com.contribute.demo.pojo.Account;
 import com.contribute.demo.pojo.Contribution;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,9 @@ public interface ContributionRepository extends JpaRepository<Contribution,Integ
     List<Contribution> findContributionsByDiscussed(boolean discussed);
     List<Contribution> findContributionsByAuthor_Id(Integer id);
 
+    List<Contribution> findByUploaddateBetweenOrderByUploaddate(String s1,String s2);
+
+    Long countByDiscussedAndAuthor(boolean b, Account account);
+    Long countByComment_PassAndAuthor(boolean b, Account account);
 
 }

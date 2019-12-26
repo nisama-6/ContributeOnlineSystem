@@ -28,6 +28,16 @@ public class CommentController {
     }
 
     /**
+     * 按上传日期查询稿件（查7天以内的）
+     */
+    @GetMapping(value = "/contributionsin7days")
+    public Result getbydate(){
+        List<Contribution> contributions=contributionService.findByUploadDateIn7Days();
+        return new Result(true,"ok",contributions);
+    }
+
+
+    /**
      * 专家添加评论
      */
     @PostMapping(value = "/addcomment")

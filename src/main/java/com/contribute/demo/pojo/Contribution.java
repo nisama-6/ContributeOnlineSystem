@@ -11,7 +11,7 @@ public class Contribution {
     private int id;
     private String name;
     private String url;
-    private double wordnumber;
+    private int wordnumber;
     private String kind;
     private String uploaddate;
     private boolean discussed;
@@ -54,11 +54,11 @@ public class Contribution {
         this.url = url;
     }
 
-    public double getWordnumber() {
+    public int getWordnumber() {
         return wordnumber;
     }
 
-    public void setWordnumber(double wordnumber) {
+    public void setWordnumber(int wordnumber) {
         this.wordnumber = wordnumber;
     }
 

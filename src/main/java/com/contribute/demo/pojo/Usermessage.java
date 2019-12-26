@@ -36,6 +36,7 @@ public class Usermessage {
     private String exp;
 
     @OneToOne()
+    @JsonIgnore
     @JoinColumn(name="accountId",referencedColumnName="id")
     private Account account;
 
