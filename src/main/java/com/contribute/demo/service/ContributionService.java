@@ -1,5 +1,6 @@
 package com.contribute.demo.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.contribute.demo.pojo.Account;
 import com.contribute.demo.pojo.Contribution;
 
@@ -19,7 +20,7 @@ public interface ContributionService {
     void save(Contribution contribution);
     List<Contribution> findByAccountID(Integer id);
 
-    List<Contribution> findByUploadDateIn7Days();
+    JSONObject findByUploadDateIn7Days();
 
     Long countByDiscussed(boolean b, Account account);
     Long countByPassed(boolean b,Account account);

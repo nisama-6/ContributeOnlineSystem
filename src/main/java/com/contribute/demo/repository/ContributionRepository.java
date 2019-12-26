@@ -18,5 +18,6 @@ public interface ContributionRepository extends JpaRepository<Contribution,Integ
 
     Long countByDiscussedAndAuthor(boolean b, Account account);
     Long countByComment_PassAndAuthor(boolean b, Account account);
+    Long countByUploaddate(String uploaddate);
 
 }

@@ -1,5 +1,6 @@
 package com.contribute.demo.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.contribute.demo.pojo.Account;
 import com.contribute.demo.pojo.Contribution;
 import com.contribute.demo.repository.ContributionRepository;
@@ -7,6 +8,7 @@ import com.contribute.demo.service.ContributionService;
 import com.contribute.demo.service.LoginMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.plugin.javascript.JSObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,17 +53,18 @@ public class ContributionServiceImpl implements ContributionService {
     }
 
     @Override
-    public List<Contribution> findByUploadDateIn7Days() {
+    public JSONObject findByUploadDateIn7Days() {
         Calendar calendarpast = Calendar.getInstance();
-        calendarpast.set(Calendar.DAY_OF_YEAR, calendarpast.get(Calendar.DAY_OF_YEAR) - 7);
-        Date past = calendarpast.getTime();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String result = format.format(past);
-        SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd");
-        Date now=new Date();
-        String nowtime=myFmt2.format(now);
-        System.out.println("七天前="+result+"now="+nowtime);
-        return contributionRepository.findByUploaddateBetweenOrderByUploaddate(result,nowtime);
+        JSONObject jsonObject=new JSONObject();
+        for(int i=0;i<7;i++){
+            calendarpast.set(Calendar.DAY_OF_YEAR, calendarpast.get(Calendar.DAY_OF_YEAR) - i);
+            Date past = calendarpast.getTime();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String result = format.format(past);
+            Long count=contributionRepository.countByUploaddate(result);
+            jsonObject.put(String.valueOf(7-i),count);
+        }
+        return jsonObject;
     }
 
     @Override

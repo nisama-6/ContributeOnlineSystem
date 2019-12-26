@@ -36,8 +36,7 @@ public class CommentController {
      */
     @GetMapping(value = "/contributionsin7days")
     public Result getbydate(){
-        List<Contribution> contributions=contributionService.findByUploadDateIn7Days();
-        return new Result(true,"ok",contributions);
+        return new Result(true,"ok",contributionService.findByUploadDateIn7Days());
     }
 
 
