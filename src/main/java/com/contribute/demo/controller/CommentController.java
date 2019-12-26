@@ -3,6 +3,8 @@ package com.contribute.demo.controller;
 import com.contribute.demo.pojo.Contribution;
 import com.contribute.demo.service.ContributionService;
 import com.contribute.demo.service.LoginMessageService;
+import com.contribute.demo.service.WebSocketService;
+import com.contribute.demo.tools.ResponseMessage;
 import com.contribute.demo.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ public class CommentController {
     ContributionService contributionService;
     @Autowired
     LoginMessageService loginMessageService;
+    @Autowired
+    WebSocketService webSocketService;
 
     /**
      * 查询所有的稿件
@@ -43,6 +47,8 @@ public class CommentController {
     @PostMapping(value = "/addcomment")
     public Result addComment(@RequestBody Contribution contribution){
         contributionService.save(contribution);
+        webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
+                new ResponseMessage("新的评论","您的投稿被专家评论了",ResponseMessage.SUCCESS));
         return new Result();
     }
 

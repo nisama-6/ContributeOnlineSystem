@@ -28,6 +28,7 @@ public class Comment {
 
     @JoinColumn(name = "contributionId" ,referencedColumnName = "id")
     @OneToOne
+    @JsonIgnore
     private Contribution contribution;
 
     public Contribution getContribution() {
