@@ -34,9 +34,9 @@ public class MyAuthenctiationSuccessHandler extends SavedRequestAwareAuthenticat
             account=accountService.findByUsername(currentUserName);
         }
         response=ResponseHandle.responseHandle(response);
-        account.setContributionList(null);
+//        account.setContributionList(null);
         response.getWriter().write( JSON.toJSONString(new Result(true,"登陆成功",account)));
-        account.setContributionList(null);
+//        account.setContributionList(null);
         account.setUsermessage(null);
         LoginMsgServiceImpl.put(account.getUsername(),account);
     }

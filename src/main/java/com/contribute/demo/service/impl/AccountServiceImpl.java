@@ -30,9 +30,21 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void editUserMessage(Usermessage msg) {
+    public Account editUserMessage(Usermessage msg) {
         Account account=loginMessageService.getLoginAccount();
-        account.setUsermessage(msg);
-        accountRepository.save(account);
+        Account a=new Account();
+
+        a.setId(account.getId());
+        a.setIdentity(account.getIdentity());
+        a.setUsername(account.getUsername());
+        a.setPassword(account.getPassword());
+
+        a.setUsermessage(msg);
+        msg.setAccount(account);
+        accountRepository.save(a);
+
+        a.getUsermessage().setAccount(null);
+
+        return a;
     }
 }

@@ -1,12 +1,10 @@
 package com.contribute.demo.controller;
 
 import com.contribute.demo.pojo.Contribution;
-import com.contribute.demo.repository.CommentRepository;
 import com.contribute.demo.service.ContributionService;
 import com.contribute.demo.service.LoginMessageService;
 import com.contribute.demo.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name="tb_usermsg")
 public class Usermessage {
     @Id
-    @JsonIgnore
+//    @JsonIgnore
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
@@ -35,7 +35,7 @@ public class Usermessage {
 
     private String exp;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name="accountId",referencedColumnName="id")
     private Account account;
 

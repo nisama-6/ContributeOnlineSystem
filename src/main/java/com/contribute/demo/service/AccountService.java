@@ -15,5 +15,5 @@ public interface AccountService {
     Account findByUsername(String username);
 
 
-    void editUserMessage(Usermessage msg);//编辑用户的个人资料
+    Account editUserMessage(Usermessage msg);//编辑用户的个人资料
 }

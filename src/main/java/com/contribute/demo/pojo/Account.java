@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name="tb_account")
 public class Account {
     @Id
-    @JsonIgnore
+//    @JsonIgnore
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
@@ -30,10 +30,9 @@ public class Account {
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true,mappedBy="account")
     private Usermessage usermessage;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,mappedBy="author",fetch = FetchType.LAZY)
-
-    private List<Contribution> contributionList;
+//    @JsonIgnore
+//    @OneToMany(orphanRemoval = true,mappedBy="author",fetch = FetchType.LAZY)
+//    private List<Contribution> contributionList;
 
 
     public String getIdentity() {
@@ -77,11 +76,11 @@ public class Account {
         this.usermessage = usermessage;
     }
 
-    public List<Contribution> getContributionList() {
-        return contributionList;
-    }
-
-    public void setContributionList(List<Contribution> contributionList) {
-        this.contributionList = contributionList;
-    }
+//    public List<Contribution> getContributionList() {
+//        return contributionList;
+//    }
+//
+//    public void setContributionList(List<Contribution> contributionList) {
+//        this.contributionList = contributionList;
+//    }
 }

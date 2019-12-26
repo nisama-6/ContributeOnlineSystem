@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsermessageRepository extends JpaRepository<Usermessage, Long> {
 
+    Usermessage save(Usermessage usermessage);
+
 }
