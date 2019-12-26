@@ -22,8 +22,7 @@ public class Contribution {
     @JoinColumn(name = "authorId" ,referencedColumnName = "id")
     private Account author;//账户
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name = "commentId" ,referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true,mappedBy = "contribution")
     private Comment comment;//评价
 
     public Contribution() {

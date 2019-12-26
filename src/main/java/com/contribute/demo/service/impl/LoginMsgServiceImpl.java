@@ -9,6 +9,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName : LoginMsgServiceImpl
@@ -23,6 +27,8 @@ public class LoginMsgServiceImpl implements LoginMessageService {
     @Autowired
     AccountService accountService;
 
+    public static Map<String,Account> accountMap=new HashMap<>();
+
     @Override
     public Account getLoginAccount() {
 
@@ -30,8 +36,16 @@ public class LoginMsgServiceImpl implements LoginMessageService {
         Account account=new Account();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
-            account=accountService.findByUsername(username);
+            account=accountMap.get(username);
         }
         return account;
+    }
+
+    public static void put(String username, Account account){
+        accountMap.put(username,account);
+    }
+
+    public static void remove(String username){
+        accountMap.remove(username);
     }
 }

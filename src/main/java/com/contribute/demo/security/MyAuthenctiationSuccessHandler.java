@@ -3,6 +3,7 @@ package com.contribute.demo.security;
 import com.alibaba.fastjson.JSON;
 import com.contribute.demo.pojo.Account;
 import com.contribute.demo.service.AccountService;
+import com.contribute.demo.service.impl.LoginMsgServiceImpl;
 import com.contribute.demo.tools.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,10 @@ public class MyAuthenctiationSuccessHandler extends SavedRequestAwareAuthenticat
             account=accountService.findByUsername(currentUserName);
         }
         response=ResponseHandle.responseHandle(response);
+        account.setContributionList(null);
         response.getWriter().write( JSON.toJSONString(new Result(true,"登陆成功",account)));
+        account.setContributionList(null);
+        account.setUsermessage(null);
+        LoginMsgServiceImpl.put(account.getUsername(),account);
     }
 }

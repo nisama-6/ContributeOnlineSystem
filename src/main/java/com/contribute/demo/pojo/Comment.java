@@ -25,6 +25,10 @@ public class Comment {
     private String suggestion;//专家的建议内容
     private String suggestdate;//发表建议的日期
 
+
+    @JoinColumn(name = "contributionId" ,referencedColumnName = "id")
+    @OneToOne
+    private Contribution contribution;
     public Comment() {
     }
 

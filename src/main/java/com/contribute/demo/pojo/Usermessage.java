@@ -27,6 +27,18 @@ public class Usermessage {
 
     private String address;
 
+    private String nickname;
+
+    private String adv_url;
+
+    private String level;
+
+    private String exp;
+
+    @OneToOne
+    @JoinColumn(name="accountId",referencedColumnName="id")
+    private Account account;
+
     public Integer getId() {
         return id;
     }
@@ -67,4 +79,43 @@ public class Usermessage {
         this.address = address;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAdv_url() {
+        return adv_url;
+    }
+
+    public void setAdv_url(String adv_url) {
+        this.adv_url = adv_url;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getExp() {
+        return exp;
+    }
+
+    public void setExp(String exp) {
+        this.exp = exp;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

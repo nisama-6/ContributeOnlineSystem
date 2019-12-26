@@ -16,7 +16,7 @@ public interface WebSocketService {
      * @param id 接收人ID
      * @param responseMessage 消息
      */
-    void sendMessageByID(Integer id, ResponseMessage responseMessage);
+    void sendMessageByID(String id, ResponseMessage responseMessage);
 
     /**
      * 发送消息给所有专家

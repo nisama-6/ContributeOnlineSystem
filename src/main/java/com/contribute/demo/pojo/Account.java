@@ -3,6 +3,7 @@ package com.contribute.demo.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @ClassName : Account
@@ -23,27 +24,17 @@ public class Account {
 
     private String password;
 
-    private String level;
-
-    private String exp;
-
-    private String nickname;
-
     private String identity;
 
-    private String adv_url;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name="userId",referencedColumnName="id")
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true,mappedBy="account")
     private Usermessage usermessage;
 
-    public String getAdv_url() {
-        return adv_url;
-    }
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,mappedBy="author",fetch = FetchType.LAZY)
 
-    public void setAdv_url(String adv_url) {
-        this.adv_url = adv_url;
-    }
+    private List<Contribution> contributionList;
+
 
     public String getIdentity() {
         return identity;
@@ -77,29 +68,6 @@ public class Account {
         this.password = password;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getExp() {
-        return exp;
-    }
-
-    public void setExp(String exp) {
-        this.exp = exp;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
 
     public Usermessage getUsermessage() {
         return usermessage;
@@ -107,5 +75,13 @@ public class Account {
 
     public void setUsermessage(Usermessage usermessage) {
         this.usermessage = usermessage;
+    }
+
+    public List<Contribution> getContributionList() {
+        return contributionList;
+    }
+
+    public void setContributionList(List<Contribution> contributionList) {
+        this.contributionList = contributionList;
     }
 }
