@@ -29,7 +29,7 @@ public class CheckCenterController {
     public String subscribe(@PathVariable("msg") String rm) {
         ResponseMessage responseMessage=new ResponseMessage("恭喜","您的稿件已通过审核！",ResponseMessage.SUCCESS);
         //广播使用convertAndSend方法，第一个参数为目的地，和js中订阅的目的地要一致
-        webSocketService.sendMessageByID("1236",responseMessage);
+        webSocketService.sendMessageByID("1",responseMessage);
         return "12";
     }
 

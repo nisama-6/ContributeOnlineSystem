@@ -14,12 +14,7 @@ public interface AccountService {
 
     Account findByUsername(String username);
 
-
     Account editUserMessage(Usermessage msg);//编辑用户的个人资料
 
-
-    Account regist(String username,String password1,String password2);//注册
-
-    Boolean checkUsername(String username);//检查用户名是否可用
-    String changePassword(String oldpassword,String password1,String password2);//修改密码
+    Account getAccount();
 }

@@ -31,24 +31,16 @@ public class CommentController {
         return new Result(true, "",contributions);
     }
 
-    /**
-     * 按上传日期查询稿件（查7天以内的）
-     */
-    @GetMapping(value = "/contributionsin7days")
-    public Result getbydate(){
-        return new Result(true,"ok",contributionService.findByUploadDateIn7Days());
-    }
 
-
-    /**
-     * 专家添加评论
+    /**     * 专家添加评论
      */
     @PostMapping(value = "/addcomment")
     public Result addComment(@RequestBody Contribution contribution){
         contributionService.save(contribution);
+        List<Contribution> contributions= contributionService.findAll();
         webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
                 new ResponseMessage("新的评论","您的投稿被专家评论了",ResponseMessage.SUCCESS));
-        return new Result();
+        return new Result(true, "",contributions);
     }
 
 

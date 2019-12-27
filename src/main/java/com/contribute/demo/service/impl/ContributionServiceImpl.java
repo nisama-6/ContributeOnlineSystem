@@ -8,9 +8,9 @@ import com.contribute.demo.service.ContributionService;
 import com.contribute.demo.service.LoginMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.plugin.javascript.JSObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +22,9 @@ public class ContributionServiceImpl implements ContributionService {
     ContributionRepository contributionRepository;
     @Autowired
     LoginMessageService loginMessageService;
+
+    @Autowired
+    ContributionService contributionService;
 
     @Override
     public List<Contribution> findIsDiscussed(boolean isDiscussed) {
@@ -54,16 +57,40 @@ public class ContributionServiceImpl implements ContributionService {
 
     @Override
     public JSONObject findByUploadDateIn7Days() {
-        Calendar calendarpast = Calendar.getInstance();
+
+        Account account=loginMessageService.getLoginAccount();
+        Long discussed=contributionService.countByDiscussed(true,account);
+        Long undiscussed=contributionService.countByDiscussed(false,account);
+        Long passed=contributionService.countByPassed(true,account);
+        Long unpassed=discussed-passed;
+
+
+
+
         JSONObject jsonObject=new JSONObject();
-        for(int i=0;i<7;i++){
+        List<Long> countList=new ArrayList<>();
+        List<String> weekdayList=new ArrayList<>();
+        for(int i=6;i>=0;i--){
+            Calendar calendarpast = Calendar.getInstance();
             calendarpast.set(Calendar.DAY_OF_YEAR, calendarpast.get(Calendar.DAY_OF_YEAR) - i);
             Date past = calendarpast.getTime();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format2 = new SimpleDateFormat("MM-dd");
             String result = format.format(past);
+            String weekday=format2.format(past);
             Long count=contributionRepository.countByUploaddate(result);
-            jsonObject.put(String.valueOf(7-i),count);
+            countList.add(count);
+            weekdayList.add(weekday);
         }
+        jsonObject.put("countlist",countList);
+        jsonObject.put("weekdaylist",weekdayList);
+        JSONObject passCount = new JSONObject();
+        passCount.put("total",discussed+undiscussed);
+        passCount.put("discussed", discussed);
+        passCount.put("undiscussed", undiscussed);
+        passCount.put("passed", passed);
+        passCount.put("unpassed", unpassed);
+        jsonObject.put("passCount",passCount);
         return jsonObject;
     }
 
