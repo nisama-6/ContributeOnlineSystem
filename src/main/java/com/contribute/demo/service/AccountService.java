@@ -17,7 +17,6 @@ public interface AccountService {
 
     Account editUserMessage(Usermessage msg);//编辑用户的个人资料
 
-
     Account regist(String username,String password1,String password2);//注册
 
     Boolean checkUsername(String username);//检查用户名是否可用
