@@ -8,4 +8,5 @@ package com.contribute.demo.service;
  **/
 
 public interface CommentService {
+
 }

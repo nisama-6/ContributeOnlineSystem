@@ -40,41 +40,31 @@ public class UserContributionsController {
         List<Contribution> contributions= contributionService.findByAccountID(account.getId());
         return new Result(true, "",contributions);
     }
-//
-//    /**
-//     * 查询被评论/没被评论 通过/没通过的数量
-//     * @param account
-//     * @return
-//     */
-//    @GetMapping(value = "/passedcount")
-//    public Result getMyDiscussedCount(@RequestBody Account account){
-//        Long discussed=contributionService.countByDiscussed(true,account);
-//        Long undiscussed=contributionService.countByDiscussed(false,account);
-//        Long passed=contributionService.countByPassed(true,account);
-//        long unpassed=contributionService.countByPassed(false,account);
-//
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("total",discussed+undiscussed );
-//        jsonObject.put("discussed", discussed);
-//        jsonObject.put("undiscussed", undiscussed);
-//        jsonObject.put("passed", passed);
-//        jsonObject.put("unpassed", unpassed);
-//
-//
-//        System.out.println("评论过"+discussed+" ，没评论过"+undiscussed);
-//        return new Result(true,"",jsonObject);
-//
-//    }
-
 
     /**
-     * 按上传日期查询稿件（查7天以内的）
+     * 查询被评论/没被评论 通过/没通过的数量
+     * @param account
+     * @return
      */
-    @GetMapping(value = "/contributionsin7days")
-    public Result getbydate(){
-        return new Result(true,"ok",contributionService.findByUploadDateIn7Days());
-    }
+    @PostMapping(value = "/passedcount")
+    public Result getMyDiscussedCount(@RequestBody Account account){
+        Long discussed=contributionService.countByDiscussed(true,account);
+        Long undiscussed=contributionService.countByDiscussed(false,account);
+        Long passed=contributionService.countByPassed(true,account);
+        long unpassed=contributionService.countByPassed(false,account);
 
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("total",discussed+undiscussed );
+        jsonObject.put("discussed", discussed);
+        jsonObject.put("undiscussed", undiscussed);
+        jsonObject.put("passed", passed);
+        jsonObject.put("unpassed", unpassed);
+
+
+        System.out.println("评论过"+discussed+" ，没评论过"+undiscussed);
+        return new Result(true,"",jsonObject);
+
+    }
     /**
      * 专家添加评论
      */
