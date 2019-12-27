@@ -21,5 +21,5 @@ public interface AccountService {
     Account regist(String username,String password1,String password2);//注册
 
     Boolean checkUsername(String username);//检查用户名是否可用
-    String changePassword(String oldpassword,String password1,String password2);//修改密码
+    String changePassword(String oldpassword,String password1,String password2);//修改密码1
 }

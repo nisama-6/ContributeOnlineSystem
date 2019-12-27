@@ -74,7 +74,7 @@ public class AccountServiceImpl implements AccountService {
                 return "输入的两次新密码不相等";
             }
         } else {
-            System.out.println("旧密码不正确");
+            System.out.println("旧密码不正确！");
             return "旧密码不正确";
         }
     }
