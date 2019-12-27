@@ -46,8 +46,6 @@ public class CommentController {
     @PostMapping(value = "/addcomment")
     public Result addComment(@RequestBody Contribution contribution){
         contributionService.save(contribution);
-        webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
-                new ResponseMessage("新的评论","您的投稿被专家评论了",ResponseMessage.SUCCESS));
         return new Result();
     }
 

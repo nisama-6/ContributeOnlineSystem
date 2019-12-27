@@ -6,6 +6,8 @@ import com.contribute.demo.pojo.Contribution;
 import com.contribute.demo.repository.ContributionRepository;
 import com.contribute.demo.service.ContributionService;
 import com.contribute.demo.service.LoginMessageService;
+import com.contribute.demo.service.WebSocketService;
+import com.contribute.demo.tools.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sun.plugin.javascript.JSObject;
@@ -22,6 +24,8 @@ public class ContributionServiceImpl implements ContributionService {
     ContributionRepository contributionRepository;
     @Autowired
     LoginMessageService loginMessageService;
+    @Autowired
+    WebSocketService webSocketService;
 
     @Override
     public List<Contribution> findIsDiscussed(boolean isDiscussed) {
@@ -44,6 +48,15 @@ public class ContributionServiceImpl implements ContributionService {
         contribution.setDiscussed(true);
         contribution.getComment().setContribution(contribution);
         contribution.getComment().setExpert(loginMessageService.getLoginAccount());
+        if(contribution.getComment().isPass()){
+            webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
+                    new ResponseMessage("新的评论","您的投稿被专家评论通过成功了",ResponseMessage.SUCCESS));
+        }
+        else {
+            webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
+                    new ResponseMessage("新的评论","您的投稿未通过",ResponseMessage.DANGER));
+
+        }
         contributionRepository.save(contribution);
     }
 
