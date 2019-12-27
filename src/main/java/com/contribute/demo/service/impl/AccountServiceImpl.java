@@ -65,9 +65,9 @@ public class AccountServiceImpl implements AccountService {
         Account oldaccount = loginMessageService.getLoginAccount();
         if (oldaccount.getPassword().equals(oldpassword)) {
             if (password1.equals(password2)) {
-                Account account = new Account(oldaccount.getUsername(), password1, "user");
-                account.setId(oldaccount.getId());
-                accountRepository.save(account);
+
+                accountRepository.changepassword(password1,oldaccount.getId());
+
                 return "修改结束";
             } else {
                 System.out.println("输入的两次新密码不相等");
@@ -81,7 +81,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account regist(String username, String password1, String password2) {
-
 
         if (password1.equals(password2) || accountRepository.countByUsername(username) == 0) {
             Account account = new Account(username, password1, "user");//用户的identity为user

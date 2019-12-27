@@ -10,8 +10,6 @@ import com.contribute.demo.service.WebSocketService;
 import com.contribute.demo.tools.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.plugin.javascript.JSObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,8 +41,7 @@ public class ContributionServiceImpl implements ContributionService {
     }
 
     @Override
-    public void save(Contribution contribution) {
-
+    public synchronized void save(Contribution contribution) {
         contribution.setDiscussed(true);
         contribution.getComment().setContribution(contribution);
         contribution.getComment().setExpert(loginMessageService.getLoginAccount());
@@ -55,7 +52,6 @@ public class ContributionServiceImpl implements ContributionService {
         else {
             webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
                     new ResponseMessage("新的评论","您的投稿未通过",ResponseMessage.DANGER));
-
         }
         contributionRepository.save(contribution);
     }
