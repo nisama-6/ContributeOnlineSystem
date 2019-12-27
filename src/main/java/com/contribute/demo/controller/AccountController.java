@@ -90,8 +90,10 @@ public class AccountController {
      */
     @RequestMapping(value = "/getaccount", method = RequestMethod.GET)
     public Result getAccount() {
+
         Account account = loginMessageService.getLoginAccount();
-        return new Result(true, "ok", account);
+        Account account1=accountService.findByUsername(account.getUsername());
+        return new Result(true, "ok", account1);
     }
 
 
