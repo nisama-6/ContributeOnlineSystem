@@ -76,7 +76,27 @@ public class Account {
         this.usermessage = usermessage;
     }
 
-//    public List<Contribution> getContributionList() {
+    public Account() {
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", identity='" + identity + '\'' +
+                ", usermessage=" + usermessage +
+                '}';
+    }
+
+    public Account(String username, String password, String identity) {
+        this.username = username;
+        this.password = password;
+        this.identity = identity;
+    }
+
+    //    public List<Contribution> getContributionList() {
 //        return contributionList;
 //    }
 //
