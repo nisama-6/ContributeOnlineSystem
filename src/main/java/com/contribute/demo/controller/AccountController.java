@@ -70,6 +70,13 @@ public class AccountController {
         return new Result(true, "注册",account);
     }
 
+    /**
+     * 更改密码
+     * @param oldpassword
+     * @param password1
+     * @param password2
+     * @return
+     */
     @RequestMapping(value="/changepassword",method = RequestMethod.POST)
     public Result changePassword(String oldpassword,String password1,String password2){
         String msg=accountService.changePassword(oldpassword,password1,password2);
