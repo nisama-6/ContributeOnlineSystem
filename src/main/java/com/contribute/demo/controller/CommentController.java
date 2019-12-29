@@ -27,17 +27,30 @@ public class CommentController {
 
     /**
      * 查询所有的稿件
+     * 可根据nickname或name查询
      */
     @GetMapping(value = "/contributions")
     @PreAuthorize("hasAnyAuthority('expert')")
-    public Result list(){
-        List<Contribution> contributions= contributionService.findAll();
+    public Result list(String name){
+        List<Contribution> contributions= contributionService.
+                findByAuthor_Usermessage_NicknameLikeOrNameLike(name,name);
+
         return new Result(true, "",contributions);
     }
 
     /**
-     * 按上传日期查询稿件（查7天以内的）
+     * 按照是否审核 查询稿件
+     * @param discussed
+     * @return
      */
+    @GetMapping(value = "/contributionsbydiscussed")
+    public Result listbydiscussed(boolean discussed){
+        List<Contribution> contributions=contributionService.findByDiscussed(discussed);
+        return new Result(true,"按照是否审核 查询",contributions);
+
+    }
+
+
 
     /**
      * 专家添加评论
@@ -48,6 +61,10 @@ public class CommentController {
         contributionService.save(contribution);
         return new Result();
     }
+
+
+
+
 
 
 

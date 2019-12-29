@@ -58,8 +58,16 @@ public class ContributionServiceImpl implements ContributionService {
     public synchronized void save(Contribution contribution) throws IOException, ServletException {
 
         contribution.setDiscussed(true);
+
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String result = format.format(now);//获取当前时间result
+
+        contribution.getComment().setSuggestdate(result);
         contribution.getComment().setContribution(contribution);
         contribution.getComment().setExpert(loginMessageService.getLoginAccount());
+
         if(contribution.getComment().isPass()){
             PushMethod pushMethod =new PushToUser(template);
             ResMessage resMessage=new MessageSuccess(pushMethod,"恭喜","您的投稿通过成功了");
@@ -76,6 +84,17 @@ public class ContributionServiceImpl implements ContributionService {
     @Override
     public List<Contribution> findByAccountID(Integer id) {
         return contributionRepository.findContributionsByAuthor_Id(id);
+    }
+
+    @Override
+    public List<Contribution> findByAuthor_Usermessage_NicknameLikeOrNameLike(String nickname, String name) {
+        return contributionRepository.
+                findByAuthor_Usermessage_NicknameLikeOrNameLike("%"+nickname+"%","%"+name+"%");
+    }
+
+    @Override
+    public List<Contribution> findByDiscussed(boolean b) {
+        return contributionRepository.findContributionsByDiscussed(b);
     }
 
     @Override

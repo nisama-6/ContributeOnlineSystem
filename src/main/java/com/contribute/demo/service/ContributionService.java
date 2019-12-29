@@ -21,11 +21,15 @@ public interface ContributionService {
     List<Contribution> findIsDiscussed(boolean isDiscussed);
     void save(Contribution contribution) throws IOException, ServletException;
     List<Contribution> findByAccountID(Integer id);
+    List<Contribution> findByAuthor_Usermessage_NicknameLikeOrNameLike(String nickname,String name);
+    List<Contribution> findByDiscussed(boolean b);
 
     JSONObject findByUploadDateIn7Days() throws IOException, ServletException;
 
     Long countByDiscussed(boolean b, Account account);
     Long countByPassed(boolean b,Account account);
+
+
 
 
 

@@ -34,11 +34,6 @@ public class AccountController {
     @Autowired
     private UsermessageRepository usermessageRepository;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(HttpServletResponse response) throws IOException {
-        return "login";
-    }
-
 
     /**
      * 用户新增/修改个人资料
@@ -74,7 +69,7 @@ public class AccountController {
     @RequestMapping(value="/changepassword",method = RequestMethod.POST)
     public Result changePassword(String oldPassword,String newPassword1,String newPassword2) throws IOException, ServletException {
         String msg=accountService.changePassword(oldPassword,newPassword1,newPassword2);
-        return new Result(true,msg);
+        return new Result(msg.equals("修改结束"),msg);
     }
 
     /**
