@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.DigestUtils;
 
 @Configuration
 @EnableWebSecurity
@@ -30,17 +31,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyLogoutSuccessHandler myLogoutSuccessHandler;
 
+    @Autowired
+    CustomAccessDeniedHandler customAccessDeniedHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new PasswordEncoder() {
             @Override
             public String encode(CharSequence charSequence) {
 //                return DigestUtils.md5DigestAsHex(charSequence.toString().getBytes());
-                return charSequence.toString();
+                return DigestUtils.md5DigestAsHex(charSequence.toString().getBytes());
             }
             @Override
             public boolean matches(CharSequence charSequence, String s) {
-                return s.equals(charSequence.toString());
+                return s.equals(DigestUtils.md5DigestAsHex(charSequence.toString().getBytes()));
             }
         });
     }
@@ -89,6 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.sessionManagement().invalidSessionStrategy(customInvalidSessionStrategy);
         http.csrf().disable();
         http.exceptionHandling().authenticationEntryPoint(new UnauthorizedEntryPoint());
+        http.exceptionHandling().accessDeniedHandler(customAccessDeniedHandler);
 
     }
 //

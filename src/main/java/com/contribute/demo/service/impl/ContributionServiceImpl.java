@@ -3,18 +3,20 @@ package com.contribute.demo.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.contribute.demo.pojo.Account;
 import com.contribute.demo.pojo.Contribution;
+import com.contribute.demo.pojo.Usermessage;
 import com.contribute.demo.repository.ContributionRepository;
+import com.contribute.demo.repository.UsermessageRepository;
 import com.contribute.demo.service.ContributionService;
 import com.contribute.demo.service.LoginMessageService;
 import com.contribute.demo.service.WebSocketService;
 import com.contribute.demo.tools.ResponseMessage;
-import com.contribute.demo.tools.pushmessage.MessageSuccess;
-import com.contribute.demo.tools.pushmessage.PushMethod;
-import com.contribute.demo.tools.pushmessage.PushToUser;
-import com.contribute.demo.tools.pushmessage.ResMessage;
+import com.contribute.demo.tools.pushmessage.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.ServletException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,6 +34,8 @@ public class ContributionServiceImpl implements ContributionService {
     WebSocketService webSocketService;
     @Autowired
     public SimpMessagingTemplate template;
+    @Autowired
+    UsermessageRepository usermessageRepository;
     @Override
     public List<Contribution> findIsDiscussed(boolean isDiscussed) {
         return contributionRepository.findContributionsByDiscussed(isDiscussed);
@@ -44,11 +48,14 @@ public class ContributionServiceImpl implements ContributionService {
 
     @Override
     public void upload(Contribution contribution) {
+        PushMethod pushMethod=new PushToExpert(template);
+        ResMessage resMessage=new MessageSuccess(pushMethod,"消息","有新的稿件投递");
+        resMessage.pushToAll();
         contributionRepository.save(contribution);
     }
 
     @Override
-    public synchronized void save(Contribution contribution) {
+    public synchronized void save(Contribution contribution) throws IOException, ServletException {
 
         contribution.setDiscussed(true);
         contribution.getComment().setContribution(contribution);
@@ -56,6 +63,7 @@ public class ContributionServiceImpl implements ContributionService {
         if(contribution.getComment().isPass()){
             PushMethod pushMethod =new PushToUser(template);
             ResMessage resMessage=new MessageSuccess(pushMethod,"恭喜","您的投稿通过成功了");
+            this.AddExp(contribution.getAuthor());
             resMessage.pushToOne(String.valueOf(contribution.getAuthor().getId()));
         }
         else {
@@ -71,7 +79,7 @@ public class ContributionServiceImpl implements ContributionService {
     }
 
     @Override
-    public JSONObject findByUploadDateIn7Days() {
+    public JSONObject findByUploadDateIn7Days() throws IOException, ServletException {
         Account account=loginMessageService.getLoginAccount();
         Long undiscussed=contributionRepository.countByDiscussedAndAuthor(false,account);
         Long passed=contributionRepository.countByComment_PassAndAuthor(true,account);
@@ -113,5 +121,22 @@ public class ContributionServiceImpl implements ContributionService {
     @Override
     public Long countByPassed(boolean b, Account account) {
         return contributionRepository.countByComment_PassAndAuthor(b,account);
+    }
+
+
+    private void AddExp(Account account) throws IOException, ServletException {
+        Usermessage usermessage=account.getUsermessage();
+        Integer exp=usermessage.getExp();
+        Integer level=usermessage.getLevel();
+        exp+=1000;
+        if(exp-10000>1){
+            exp-=10000;
+            level+=1;
+        }
+        usermessage.setExp(exp);
+        usermessage.setLevel(level);
+        usermessage.setAccount(account);
+        usermessageRepository.save(usermessage);
+
     }
 }

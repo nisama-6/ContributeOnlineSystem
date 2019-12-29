@@ -1,6 +1,7 @@
 package com.contribute.demo.security;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.contribute.demo.pojo.Account;
 import com.contribute.demo.service.AccountService;
 import com.contribute.demo.service.impl.LoginMsgServiceImpl;
@@ -34,10 +35,10 @@ public class MyAuthenctiationSuccessHandler extends SavedRequestAwareAuthenticat
             account=accountService.findByUsername(currentUserName);
         }
         response=ResponseHandle.responseHandle(response);
-//        account.setContributionList(null);
+//        account.setUsermessage(null);
+
         response.getWriter().write( JSON.toJSONString(new Result(true,"登陆成功",account)));
-//        account.setContributionList(null);
-        account.setUsermessage(null);
+        account.setPassword(null);
         LoginMsgServiceImpl.put(account.getUsername(),account);
     }
 }

@@ -22,6 +22,7 @@ public class Account {
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     private String identity;

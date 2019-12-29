@@ -2,6 +2,9 @@ package com.contribute.demo.service;
 
 import com.contribute.demo.pojo.Account;
 
+import javax.servlet.ServletException;
+import java.io.IOException;
+
 /**
  * @ClassName : LoginMessageService
  * @Description : TODO
@@ -11,5 +14,5 @@ import com.contribute.demo.pojo.Account;
 
 public interface LoginMessageService {
 
-    Account getLoginAccount();
+    Account getLoginAccount() throws IOException, ServletException;
 }

@@ -31,9 +31,9 @@ public class Usermessage {
 
     private String adv_url;
 
-    private String level;
+    private Integer level;
 
-    private String exp;
+    private Integer exp;
 
     @OneToOne()
     @JsonIgnore
@@ -96,19 +96,19 @@ public class Usermessage {
         this.adv_url = adv_url;
     }
 
-    public String getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
-    public String getExp() {
+    public Integer getExp() {
         return exp;
     }
 
-    public void setExp(String exp) {
+    public void setExp(Integer exp) {
         this.exp = exp;
     }
 

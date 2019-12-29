@@ -10,6 +10,7 @@ import com.contribute.demo.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -38,16 +39,12 @@ public class AccountController {
         return "login";
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test(HttpServletResponse response) throws IOException {
-        return "login";
-    }
 
     /**
      * 用户新增/修改个人资料
      */
     @RequestMapping(value = "/editusermsg", method = RequestMethod.POST)
-    public Result editUserMessage(@RequestBody Usermessage msg) {
+    public Result editUserMessage(@RequestBody Usermessage msg) throws IOException, ServletException {
         Account account = accountService.editUserMessage(msg);
 
         return new Result(true, "新增修改成功", account);
@@ -75,7 +72,7 @@ public class AccountController {
      * @return
      */
     @RequestMapping(value="/changepassword",method = RequestMethod.POST)
-    public Result changePassword(String oldPassword,String newPassword1,String newPassword2){
+    public Result changePassword(String oldPassword,String newPassword1,String newPassword2) throws IOException, ServletException {
         String msg=accountService.changePassword(oldPassword,newPassword1,newPassword2);
         return new Result(true,msg);
     }
@@ -86,18 +83,11 @@ public class AccountController {
      * @return
      */
     @RequestMapping(value = "/getaccount", method = RequestMethod.GET)
-    public Result getAccount() {
+    public Result getAccount() throws IOException, ServletException {
 
         Account account = loginMessageService.getLoginAccount();
         Account account1=accountService.findByUsername(account.getUsername());
         return new Result(true, "ok", account1);
     }
 
-
-//    @RequestMapping(path = "/send",method = RequestMethod.POST)
-//    String sendMessage(@RequestParam("message") String message){
-//        webSocketService.sendMessageToAllExpert(message);
-//
-//        return "发送成功";
-//    }
 }

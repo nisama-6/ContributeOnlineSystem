@@ -2,6 +2,7 @@ package com.contribute.demo.controller;
 
 
 import com.qiniu.util.Auth;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import javax.servlet.ServletException;
 @RequestMapping(value = "/token")
 public class QiniuController {
 
-
+    @PreAuthorize("hasAnyAuthority('user','expert')")
     @RequestMapping(value = "",method= RequestMethod.GET)
     public String getToken() throws ServletException {
         String accessKey = "6F41PkcSjijohUiR9JkH2B52Be9sc5zqTEfmXCJ_";

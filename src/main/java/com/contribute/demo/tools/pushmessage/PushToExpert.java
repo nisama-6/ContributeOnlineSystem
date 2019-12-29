@@ -15,9 +15,14 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 public class PushToExpert implements PushMethod {
 
-    @Autowired
     public SimpMessagingTemplate template;
     private Logger logger= LoggerFactory.getLogger(DemoApplication.class);
+
+
+    public PushToExpert(SimpMessagingTemplate template) {
+        this.template = template;
+    }
+
     @Override
     public void pushToOne(String id, String message) {
         template.convertAndSendToUser(id,"/message",message);

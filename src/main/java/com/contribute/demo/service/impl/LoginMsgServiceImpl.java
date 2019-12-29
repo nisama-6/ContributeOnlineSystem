@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import javax.servlet.ServletException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +32,7 @@ public class LoginMsgServiceImpl implements LoginMessageService {
     public static Map<String,Account> accountMap=new HashMap<>();
 
     @Override
-    public Account getLoginAccount() {
+    public Account getLoginAccount() throws IOException, ServletException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account=new Account();
@@ -38,7 +40,13 @@ public class LoginMsgServiceImpl implements LoginMessageService {
             String username = authentication.getName();
             account=accountMap.get(username);
         }
-        return account;
+        if(account==null){
+            throw new ServletException("非法访问");
+        }else
+        {
+            return account;
+        }
+
     }
 
     public static void put(String username, Account account){
