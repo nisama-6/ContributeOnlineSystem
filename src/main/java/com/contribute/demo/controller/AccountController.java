@@ -50,7 +50,7 @@ public class AccountController {
     public Result editUserMessage(@RequestBody Usermessage msg) {
         Account account = accountService.editUserMessage(msg);
 
-        return new Result(true, "新增 修改成功", account);
+        return new Result(true, "新增修改成功", account);
     }
 
     @RequestMapping(value = "/checkusername",method = RequestMethod.GET)
@@ -72,14 +72,11 @@ public class AccountController {
 
     /**
      * 更改密码
-     * @param oldpassword
-     * @param password1
-     * @param password2
      * @return
      */
     @RequestMapping(value="/changepassword",method = RequestMethod.POST)
-    public Result changePassword(String oldpassword,String password1,String password2){
-        String msg=accountService.changePassword(oldpassword,password1,password2);
+    public Result changePassword(String oldPassword,String newPassword1,String newPassword2){
+        String msg=accountService.changePassword(oldPassword,newPassword1,newPassword2);
         return new Result(true,msg);
     }
 
