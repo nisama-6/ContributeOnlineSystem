@@ -49,7 +49,8 @@ public class ContributionServiceImpl implements ContributionService {
     @Override
     public void upload(Contribution contribution) {
         PushMethod pushMethod=new PushToExpert(template);
-        ResMessage resMessage=new MessageSuccess(pushMethod,"消息","有新的稿件投递");
+        ResMessage resMessage=new MessageSuccessFactory().createResMessage(pushMethod,"消息","有新的稿件投递");
+//                new MessageSuccess(pushMethod,"消息","有新的稿件投递");
         resMessage.pushToAll();
         contributionRepository.save(contribution);
     }
@@ -70,7 +71,9 @@ public class ContributionServiceImpl implements ContributionService {
 
         if(contribution.getComment().isPass()){
             PushMethod pushMethod =new PushToUser(template);
-            ResMessage resMessage=new MessageSuccess(pushMethod,"恭喜","您的投稿通过成功了");
+            ResMessage resMessage=new MessageSuccessFactory().
+                    createResMessage(pushMethod,"恭喜","您的投稿通过成功了");
+//                    new MessageSuccess(pushMethod,"恭喜","您的投稿通过成功了");
             this.AddExp(contribution.getAuthor());
             resMessage.pushToOne(String.valueOf(contribution.getAuthor().getId()));
         }
