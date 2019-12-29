@@ -59,7 +59,7 @@ public class CommentController {
     @PostMapping(value = "/addcomment")
     public Result addComment(@RequestBody Contribution contribution) throws IOException, ServletException {
         contributionService.save(contribution);
-        List<Contribution> contributions=contributionService.findByDiscussed(true);
+        List<Contribution> contributions=contributionService.findByDiscussed(false);
         return new Result(true,"",contributions);
     }
 
