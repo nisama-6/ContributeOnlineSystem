@@ -29,9 +29,9 @@ class DemoApplicationTests {
     void test1() {
 
         String name = "";
-        List<Contribution> list=contributionService.findByAuthor_Usermessage_NicknameLikeOrNameLike("%"+name+"%","%"+name+"%");
-//        =contributionRepository.
-//                findByAuthor_Usermessage_NicknameLikeOrNameLike("%"+name+"%","%"+name+"%");
+        List<Contribution> list=contributionService.
+                findByAuthor_Usermessage_NicknameLikeOrNameLike("%"+name+"%","%"+name+"%");
+
 
         Iterator it = list.iterator();
         while (it.hasNext()) {
