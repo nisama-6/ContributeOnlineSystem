@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
+
     Account findAccountById(Integer id);
     Account findAccountByUsername(String username);
     Account findAccountByUsermessage_Name(String name);
