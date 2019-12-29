@@ -44,6 +44,7 @@ public class CommentController {
      * @return
      */
     @GetMapping(value = "/contributionsbydiscussed")
+    @PreAuthorize("hasAnyAuthority('expert')")
     public Result listbydiscussed(boolean discussed){
         List<Contribution> contributions=contributionService.findByDiscussed(discussed);
         return new Result(true,"按照是否审核 查询",contributions);
