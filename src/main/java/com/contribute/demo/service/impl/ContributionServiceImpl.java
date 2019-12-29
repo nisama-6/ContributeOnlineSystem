@@ -118,7 +118,7 @@ public class ContributionServiceImpl implements ContributionService {
             SimpleDateFormat format2 = new SimpleDateFormat("MM-dd");
             String result = format.format(past);
             String result2 = format2.format(past);
-            Long count=contributionRepository.countByUploaddate(result);
+            Long count=contributionRepository.countByUploaddateAndAuthor(result,account);
             countlist.add(count);
             weekdaylist.add(result2);
         }

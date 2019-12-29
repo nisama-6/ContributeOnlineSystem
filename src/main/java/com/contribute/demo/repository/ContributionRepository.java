@@ -18,7 +18,7 @@ public interface ContributionRepository extends JpaRepository<Contribution,Integ
 
     Long countByDiscussedAndAuthor(boolean b, Account account);
     Long countByComment_PassAndAuthor(boolean b, Account account);
-    Long countByUploaddate(String uploaddate);
+    Long countByUploaddateAndAuthor(String uploaddate,Account account);
 
     List<Contribution> findByAuthor_Usermessage_NicknameLikeOrNameLike(String nickname, String name);
     List<Contribution> findByNameLike(String name);
