@@ -28,13 +28,13 @@ public class CommentController {
     /**
      * 查询所有的稿件
      * 可根据nickname或name查询
+     * 只返回被discussed的内容
      */
     @GetMapping(value = "/contributions")
     @PreAuthorize("hasAnyAuthority('expert')")
     public Result list(String name){
         List<Contribution> contributions= contributionService.
                 findByAuthor_Usermessage_NicknameLikeOrNameLike(name,name);
-
         return new Result(true, "",contributions);
     }
 
@@ -50,7 +50,6 @@ public class CommentController {
         return new Result(true,"按照是否审核 查询",contributions);
 
     }
-
 
 
     /**

@@ -2,6 +2,7 @@ package com.contribute.demo;
 
 import com.contribute.demo.pojo.Contribution;
 import com.contribute.demo.repository.ContributionRepository;
+import com.contribute.demo.service.ContributionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,20 +22,22 @@ class DemoApplicationTests {
 
     @Autowired
     ContributionRepository contributionRepository;
+    @Autowired
+    ContributionService contributionService;
 
     @Test
     void test1() {
 
-        String name = "独奏";
-        List<Contribution> list=contributionRepository.
-                findByAuthor_Usermessage_NicknameLikeOrNameLike("%"+name+"%","%"+name+"%");
+        String name = "";
+        List<Contribution> list=contributionService.findByAuthor_Usermessage_NicknameLikeOrNameLike("%"+name+"%","%"+name+"%");
+//        =contributionRepository.
+//                findByAuthor_Usermessage_NicknameLikeOrNameLike("%"+name+"%","%"+name+"%");
 
-
-//        List<Contribution> list = contributionRepository.findByNameLike("%" + name + "%");
         Iterator it = list.iterator();
         while (it.hasNext()) {
             System.out.println(it.next());
         }
+        System.out.println(list.size());
     }
 
     @Test
