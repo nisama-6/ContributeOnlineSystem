@@ -75,8 +75,12 @@ public class ContributionServiceImpl implements ContributionService {
             this.AddExp(contribution.getAuthor());
             resMessage.pushToOne(String.valueOf(contribution.getAuthor().getId()));
         } else {
-            webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
-                    new ResponseMessage("新的评论", "您的投稿未通过", ResponseMessage.DANGER));
+//            webSocketService.sendMessageByID(String.valueOf(contribution.getAuthor().getId()),
+//                    new ResponseMessage("新的评论", "您的投稿未通过", ResponseMessage.DANGER));
+                    PushMethod pushMethod = new PushToUser(template);
+            ResMessage resMessage = new MessageErrorFactory().
+                    createResMessage(pushMethod,"新的评论", "您的投稿未通过");
+
         }
         contributionRepository.save(contribution);
     }
